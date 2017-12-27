@@ -1,0 +1,6 @@
+<div class="questionniare-section">
+  Question section name: {{section.headerText}}
+  <ng-container *ngFor="let question of sectionQuestions">
+    <app-question [question]="question"></app-question>
+  </ng-container>
+</div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as questionnaireMock from './questionnaire-mock.json';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+
+  questionnaire = (questionnaireMock as any).questionnaire;
 }
