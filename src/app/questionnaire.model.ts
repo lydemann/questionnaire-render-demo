@@ -9,7 +9,7 @@ export class MatchCriteria {
     answerValue: string;
 }
 
-export class Question {
+export class Question<T = any> {
     externalQuestionId: string;
     questionText: string;
     helpText: string;
@@ -17,6 +17,7 @@ export class Question {
     answerOptions: AnswerOption[];
     matchCriterias: MatchCriteria[];
     validationRules: string[];
+    answer: T;
 }
 
 export class QuestionSection {
