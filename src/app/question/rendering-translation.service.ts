@@ -7,15 +7,15 @@ const comboboxAnswerOptionLength = 7;
 
 class RenderingTranslationRule {
 
-    public static freetextRenderingRule = new RenderingTranslationRule(Rendering.freetext, (question: Question) => {
-        if (question.answerType.toLowerCase() === 'freetext') {
+    public static freetextRenderingRule = new RenderingTranslationRule(Rendering.textbox, (question: Question) => {
+        if (question.answerType.toLowerCase() === 'textbox') {
             return true;
         }
         return false;
     });
 
     public static radioRenderingRule = new RenderingTranslationRule(Rendering.radio, (question: Question) => {
-        if (question.answerType.toLocaleLowerCase() === 'SelectOne' &&
+        if (question.answerType.toLowerCase() === 'selectone' &&
             question.answerOptions.length < comboboxAnswerOptionLength) {
                 return true;
         }

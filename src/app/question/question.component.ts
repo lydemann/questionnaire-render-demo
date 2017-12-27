@@ -1,3 +1,4 @@
+import { FormGroup } from '@angular/forms';
 import { Component, OnInit, Input } from '@angular/core';
 import { Question } from '../questionnaire.model';
 import { RenderingTranslationService } from './rendering-translation.service';
@@ -12,7 +13,18 @@ import { RenderingTranslationService } from './rendering-translation.service';
 export class QuestionComponent implements OnInit {
 
   @Input() question = new Question();
-  constructor() { }
+  @Input() form: FormGroup;
+
+  get isValid() {
+    return this.form.valid;
+  }
+
+  constructor(private renderingTranslationService: RenderingTranslationService) {
+  }
+
+  getQuestionRendering(question: Question) {
+    return this.renderingTranslationService.getRenderingForQuestion(question);
+  }
 
   ngOnInit() {
   }

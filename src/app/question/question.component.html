@@ -1,6 +1,24 @@
-<div formGroupName="questions">
-  <p>
-    question works!
-  </p>
-</div>
+<div [formGroup]="form">
+    <label [attr.for]="question.externalQuestionId">{{question.questionText}}</label>
+  
+    <div [ngSwitch]="getQuestionRendering(question).toString()">
+  
+      <input *ngSwitchCase="'TEXTBOX'" [formControlName]="question.externalQuestionId"
+              [id]="question.externalQuestionId">
+      
+      <div *ngSwitchCase="'RADIO'">
+        <ng-container *ngFor="let option of question.answerOptions">
+          <input *ngSwitchCase="'RADIO'" [formControlName]="question.externalQuestionId"
+          [id]="option.optionCode" type="radio">
+          <label for="{{option.optionCode}}">{{question.questionText}}</label>
+        </ng-container>
+      </div>
 
+      <select [id]="question.externalQuestionId" *ngSwitchCase="'COMBOBOX'" [formControlName]="question.externalQuestionId">
+        <option *ngFor="let opt of question.answerOptions" [value]="opt.optionCode">{{opt.optionText}}</option>
+      </select>
+    </div> 
+  
+    <div class="errorMessage" *ngIf="!isValid">{{question.questionText}} is required</div>
+  </div>
+  
