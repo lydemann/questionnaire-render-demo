@@ -3,12 +3,41 @@ import { Injectable } from '@angular/core';
 import { Question } from '../questionnaire.model';
 import { Rendering } from './renderings';
 
+const comboboxAnswerOptionLength = 7;
+
 class RenderingTranslationRule {
 
     public static freetextRenderingRule = new RenderingTranslationRule(Rendering.freetext, (question: Question) => {
-        if (question.answerType === 'freetext') {
+        if (question.answerType.toLowerCase() === 'freetext') {
             return true;
         }
+        return false;
+    });
+
+    public static radioRenderingRule = new RenderingTranslationRule(Rendering.radio, (question: Question) => {
+        if (question.answerType.toLocaleLowerCase() === 'SelectOne' &&
+            question.answerOptions.length < comboboxAnswerOptionLength) {
+                return true;
+        }
+
+        return false;
+    });
+
+    public static checkboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
+        if (question.answerType === 'selectmulti' &&
+            question.answerOptions.length < comboboxAnswerOptionLength) {
+                return true;
+        }
+
+        return false;
+    });
+
+    public static comboboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
+        if ((question.answerType === 'selectone' || question.answerType === 'selectmulti') &&
+            question.answerOptions.length >= comboboxAnswerOptionLength) {
+                return true;
+        }
+
         return false;
     });
 
