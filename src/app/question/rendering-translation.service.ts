@@ -8,34 +8,34 @@ const comboboxAnswerOptionLength = 7;
 class RenderingTranslationRule {
 
     public static freetextRenderingRule = new RenderingTranslationRule(Rendering.textbox, (question: Question) => {
-        if (question.answerType.toLowerCase() === 'freetext') {
+        if (question.answerType.toUpperCase() === 'FREETEXT') {
             return true;
         }
         return false;
     });
 
     public static radioRenderingRule = new RenderingTranslationRule(Rendering.radio, (question: Question) => {
-        if (question.answerType.toLowerCase() === 'selectone' &&
+        if (question.answerType.toUpperCase() === 'SELECTONE' &&
             question.answerOptions.length < comboboxAnswerOptionLength) {
-                return true;
+            return true;
         }
 
         return false;
     });
 
     public static checkboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
-        if (question.answerType.toLowerCase() === 'selectmulti' &&
+        if (question.answerType.toUpperCase() === 'SELECTMULTI' &&
             question.answerOptions.length < comboboxAnswerOptionLength) {
-                return true;
+            return true;
         }
 
         return false;
     });
 
     public static comboboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
-        if ((question.answerType.toLowerCase() === 'selectone' || question.answerType.toLowerCase() === 'selectmulti') &&
+        if ((question.answerType.toUpperCase() === 'SELECTONE' || question.answerType.toUpperCase() === 'SELECTMULTI') &&
             question.answerOptions.length >= comboboxAnswerOptionLength) {
-                return true;
+            return true;
         }
 
         return false;

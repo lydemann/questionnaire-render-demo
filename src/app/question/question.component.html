@@ -1,23 +1,35 @@
 <div [formGroup]="form">
-    <label [attr.for]="question.externalQuestionId">{{question.questionText}}</label>
-  
-    <div *ngIf="form !== undefined" [ngSwitch]="getQuestionRendering(question).toString()">
-  
-      <input *ngSwitchCase="'TEXTBOX'" [formControlName]="question.externalQuestionId"
-              [id]="question.externalQuestionId">
-      
-      <div *ngSwitchCase="'RADIO'">
-        <ng-container *ngFor="let option of question.answerOptions">
-          <input *ngSwitchCase="'RADIO'" [formControlName]="question.externalQuestionId"
-          [id]="option.optionCode" type="radio">
-          <label for="{{option.optionCode}}">{{question.questionText}}</label>
-        </ng-container>
-      </div>
+  <label [attr.for]="question.externalQuestionId">{{question.questionText}}</label>
 
-      <select [id]="question.externalQuestionId" *ngSwitchCase="'COMBOBOX'" [formControlName]="question.externalQuestionId">
+  <div *ngIf="form !== undefined" [ngSwitch]="getQuestionRendering(question).toString()">
+
+    <input *ngSwitchCase="'TEXTBOX'" [formControlName]="question.externalQuestionId" [id]="question.externalQuestionId">
+
+    <div *ngSwitchCase="'RADIO'">
+      <ng-container *ngFor="let option of question.answerOptions">
+        <input [formControlName]="question.externalQuestionId" [id]="question.externalQuestionId + ' ' + option.optionCode" type="radio"
+          [value]="option.optionCode">
+        <label for="{{question.externalQuestionId + ' ' + option.optionCode}}">{{option.optionText}}</label>
+      </ng-container>
+    </div>
+
+    <div *ngSwitchCase="'COMBOBOX'">
+      <select *ngIf="question.answerType.toUpperCase() === 'SELECTONE'" [id]="question.externalQuestionId" [formControlName]="question.externalQuestionId">
         <option *ngFor="let opt of question.answerOptions" [value]="opt.optionCode">{{opt.optionText}}</option>
       </select>
-    </div> 
-  
-    <div class="errorMessage" *ngIf="!isValid">{{question.questionText}} is required</div>
+      <select *ngIf="question.answerType.toUpperCase() === 'SELECTMULTI'" [id]="question.externalQuestionId" [formControlName]="question.externalQuestionId">
+        <option *ngFor="let opt of question.answerOptions" [value]="opt.optionCode">{{opt.optionText}}</option>
+      </select>
+    </div>
+
+    <div *ngSwitchCase="'CHECKBOX'" [formArrayName]="question.externalQuestionId">
+      <ng-container *ngFor="let option of question.answerOptions; let idx = index">
+        <input [formControlName]="option.optionCode" [id]="question.externalQuestionId + ' ' + option.optionCode" type="checkbox"
+          [value]="option.optionCode">
+        <label for="{{question.externalQuestionId + ' ' + option.optionCode}}">{{option.optionText}}</label>
+      </ng-container>
+    </div>
   </div>
+  <div class="errorMessage" *ngIf="!isValid">{{question.questionText}} is required</div>
+</div>
+<hr/>
