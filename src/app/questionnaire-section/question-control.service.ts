@@ -29,7 +29,8 @@ export class QuestionControlService {
 
     private getAnswerOptionsControlsObj(answerOptions: AnswerOption[]) {
         const group: { [key: string]: AbstractControl } = {};
-        answerOptions.forEach(answerOption => group[answerOption.optionCode] = new FormControl());
+        answerOptions.forEach(answerOption => group[answerOption.optionCode]
+            = new FormControl());
         return group;
     }
 

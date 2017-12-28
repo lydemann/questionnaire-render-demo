@@ -16,7 +16,7 @@ export class QuestionComponent implements OnInit {
   @Input() form: FormGroup;
 
   get isValid() {
-    return this.form.valid;
+    return this.form.get(this.question.externalQuestionId).valid;
   }
 
   constructor(private renderingTranslationService: RenderingTranslationService) {
