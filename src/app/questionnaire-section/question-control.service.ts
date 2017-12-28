@@ -1,3 +1,4 @@
+import { QuestionSection } from './../questionnaire.model';
 import { ValidationRule } from './validation-rules';
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators, ValidationErrors, AbstractControl } from '@angular/forms';
@@ -9,33 +10,40 @@ export class QuestionControlService {
 
     constructor() { }
 
-    toFormGroup(questionnaire: Questionnaire) {
+    toFormGroup(questionSections: QuestionSection[]) {
         const group: {[key: string]: AbstractControl} = {};
 
-        questionnaire.questionSections.forEach(questionSection => {
+
+        questionSections.forEach(questionSection => {
+
+            // TODO: render this with forin to remove hardcoding
+
+            group['questionSectionName'] = new FormControl(questionSection.questionSectionName);
             group['questions'] = this.getQuestionsFormGroup(questionSection.questions);
         });
 
         return new FormGroup(group);
     }
 
-    private getQuestionsFormGroup(quesitons: Question[]): FormGroup {
+    getQuestionsFormGroup(quesitons: Question[]): FormGroup {
 
-        const questionGroup = new FormGroup({});
+        const group: {[key: string]: AbstractControl} = {};
         quesitons.forEach(question => {
-            questionGroup[question.externalQuestionId] = new FormControl(question.answer || '',
-            this.getValidationFunctions(question.validationRules));
+            const validatiors = this.getValidationFunctions(question.validationRules);
+            group[question.externalQuestionId] =
+                new FormControl(question.answer || '',
+                ...validatiors);
         });
-        return questionGroup;
+        return new FormGroup(group);
     }
 
     getValidationFunctions(validationRuleStrings: string[]): Array<(control: AbstractControl) => ValidationErrors | null> | null  {
 
         const validationRules = [];
         for (const validationRuleStr of validationRuleStrings) {
-            const validationRule = ValidationRule.validationRulesMap.get(validationRuleStr);
+            const validationRule = ValidationRule.validationRulesMap.get(validationRuleStr.toUpperCase());
             if (validationRule !== undefined) {
-                validationRules.push(validationRule);
+                validationRules.push(validationRule.validationFn);
             }
         }
 

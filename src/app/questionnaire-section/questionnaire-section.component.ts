@@ -3,6 +3,7 @@ import { Input } from '@angular/core';
 import { QuestionSection, Question } from '../questionnaire.model';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
+import { QuestionControlService } from './question-control.service';
 
 @Component({
   selector: 'app-questionnaire-section',
@@ -17,24 +18,15 @@ export class QuestionnaireSectionComponent implements OnInit {
     return this.section.questions;
   }
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private questionControlService: QuestionControlService) { }
 
-  questionSectionForm: FormGroup;
+  questionsForm: FormGroup;
+
+  saveForm() {
+    console.log(this.questionsForm);
+  }
 
   ngOnInit() {
-    this.questionSectionForm = this.formBuilder.group({
-      questionSectionName: '',
-      headerText: '',
-      subHeaderText: '',
-      repeatable: '',
-      questions: this.formBuilder.array([])
-    });
+    this.questionsForm = this.questionControlService.getQuestionsFormGroup(this.sectionQuestions);
   }
-
-  createQuestion(): FormGroup {
-    return this.formBuilder.group({
-      answer: Validators.required
-    });
-  }
-
 }

@@ -3,18 +3,18 @@ import { Validators } from '@angular/forms';
 
 export class ValidationRule {
 
-    private static _validationRuleMap: Map<string, ValidationRule>;
+    private static _validationRulesMap: Map<string, ValidationRule>;
     public static get validationRulesMap() {
-        if (!ValidationRule.validationRulesMap) {
-            ValidationRule._validationRuleMap = new Map<string, ValidationRule>();
+        if (!ValidationRule._validationRulesMap) {
+            ValidationRule._validationRulesMap = new Map<string, ValidationRule>();
         }
 
-        return ValidationRule._validationRuleMap;
+        return ValidationRule._validationRulesMap;
     }
 
     public static required = new ValidationRule('REQUIRED', Validators.required);
 
-    private constructor(private name: string, private validationFn: (control: AbstractControl) => ValidationErrors | null) {
+    private constructor(private name: string, public validationFn: (control: AbstractControl) => ValidationErrors | null) {
         ValidationRule.validationRulesMap.set(name, this);
     }
 

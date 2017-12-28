@@ -8,7 +8,7 @@ const comboboxAnswerOptionLength = 7;
 class RenderingTranslationRule {
 
     public static freetextRenderingRule = new RenderingTranslationRule(Rendering.textbox, (question: Question) => {
-        if (question.answerType.toLowerCase() === 'textbox') {
+        if (question.answerType.toLowerCase() === 'freetext') {
             return true;
         }
         return false;
@@ -24,7 +24,7 @@ class RenderingTranslationRule {
     });
 
     public static checkboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
-        if (question.answerType === 'selectmulti' &&
+        if (question.answerType.toLowerCase() === 'selectmulti' &&
             question.answerOptions.length < comboboxAnswerOptionLength) {
                 return true;
         }
@@ -33,7 +33,7 @@ class RenderingTranslationRule {
     });
 
     public static comboboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
-        if ((question.answerType === 'selectone' || question.answerType === 'selectmulti') &&
+        if ((question.answerType.toLowerCase() === 'selectone' || question.answerType.toLowerCase() === 'selectmulti') &&
             question.answerOptions.length >= comboboxAnswerOptionLength) {
                 return true;
         }
@@ -53,7 +53,10 @@ export class RenderingTranslationService {
 
     // Rendering rules goes here...
     private renderingTranslationRules: RenderingTranslationRule[] = [
-        RenderingTranslationRule.freetextRenderingRule
+        RenderingTranslationRule.freetextRenderingRule,
+        RenderingTranslationRule.radioRenderingRule,
+        RenderingTranslationRule.checkboxRenderingRule,
+        RenderingTranslationRule.comboboxRenderingRule
     ];
 
     getRenderingForQuestion(question: Question): Rendering {

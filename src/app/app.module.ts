@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { QuestionnaireComponent } from './questionnaire/questionnaire.component';
 import { QuestionnaireSectionComponent } from './questionnaire-section/questionnaire-section.component';
 import { QuestionComponent } from './question/question.component';
+import { QuestionControlService } from './questionnaire-section/question-control.service';
 
 
 @NgModule({
@@ -20,7 +21,7 @@ import { QuestionComponent } from './question/question.component';
     BrowserModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [QuestionControlService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

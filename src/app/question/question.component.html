@@ -1,7 +1,7 @@
 <div [formGroup]="form">
     <label [attr.for]="question.externalQuestionId">{{question.questionText}}</label>
   
-    <div [ngSwitch]="getQuestionRendering(question).toString()">
+    <div *ngIf="form !== undefined" [ngSwitch]="getQuestionRendering(question).toString()">
   
       <input *ngSwitchCase="'TEXTBOX'" [formControlName]="question.externalQuestionId"
               [id]="question.externalQuestionId">
@@ -21,4 +21,3 @@
   
     <div class="errorMessage" *ngIf="!isValid">{{question.questionText}} is required</div>
   </div>
-  
