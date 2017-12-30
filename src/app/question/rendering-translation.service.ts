@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Question } from '../questionnaire.model';
 import { Rendering } from './renderings';
 
-const comboboxAnswerOptionLength = 7;
+export const comboboxOptionsThreshold = 7;
 
 class RenderingTranslationRule {
 
@@ -16,7 +16,7 @@ class RenderingTranslationRule {
 
     public static radioRenderingRule = new RenderingTranslationRule(Rendering.radio, (question: Question) => {
         if (question.answerType.toUpperCase() === 'SELECTONE' &&
-            question.answerOptions.length < comboboxAnswerOptionLength) {
+            question.answerOptions.length < comboboxOptionsThreshold) {
             return true;
         }
 
@@ -25,16 +25,16 @@ class RenderingTranslationRule {
 
     public static checkboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
         if (question.answerType.toUpperCase() === 'SELECTMULTI' &&
-            question.answerOptions.length < comboboxAnswerOptionLength) {
+            question.answerOptions.length < comboboxOptionsThreshold) {
             return true;
         }
 
         return false;
     });
 
-    public static comboboxRenderingRule = new RenderingTranslationRule(Rendering.checkbox, (question: Question) => {
+    public static comboboxRenderingRule = new RenderingTranslationRule(Rendering.combobox, (question: Question) => {
         if ((question.answerType.toUpperCase() === 'SELECTONE' || question.answerType.toUpperCase() === 'SELECTMULTI') &&
-            question.answerOptions.length >= comboboxAnswerOptionLength) {
+            question.answerOptions.length >= comboboxOptionsThreshold) {
             return true;
         }
 

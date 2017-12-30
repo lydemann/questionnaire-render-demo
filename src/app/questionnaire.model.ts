@@ -10,6 +10,13 @@ export class MatchCriteria {
 }
 
 export class Question<T = any> {
+
+    constructor() {
+        this.answerOptions = [];
+        this.matchCriterias = [];
+        this.validationRules = [];
+    }
+
     externalQuestionId: string;
     questionText: string;
     helpText: string;
@@ -17,7 +24,7 @@ export class Question<T = any> {
     answerOptions: AnswerOption[];
     matchCriterias: MatchCriteria[];
     validationRules: string[];
-    answer: T;
+    answer?: T;
 }
 
 export class QuestionSection {
@@ -30,4 +37,8 @@ export class QuestionSection {
 
 export class Questionnaire {
     questionSections: QuestionSection[];
+}
+
+export class QuestionnaireRoot {
+    questionnaire: Questionnaire;
 }

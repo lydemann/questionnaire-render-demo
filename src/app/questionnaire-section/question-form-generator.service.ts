@@ -8,11 +8,9 @@ const selectOne = 'SELECTONE';
 const selectMulti = 'SELECTMULTI';
 
 @Injectable()
-export class QuestionControlService {
+export class QuestionFormGeneratorService {
 
     constructor() { }
-
-
     getQuestionsFormGroup(quesitons: Question[]): FormGroup {
 
         const group: { [key: string]: AbstractControl } = {};

@@ -3,7 +3,7 @@ import { Input } from '@angular/core';
 import { QuestionSection, Question } from '../questionnaire.model';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder, Validators } from '@angular/forms';
-import { QuestionControlService } from './question-control.service';
+import { QuestionFormGeneratorService } from './question-form-generator.service';
 
 @Component({
   selector: 'app-questionnaire-section',
@@ -18,7 +18,7 @@ export class QuestionnaireSectionComponent implements OnInit {
     return this.section.questions;
   }
 
-  constructor(private formBuilder: FormBuilder, private questionControlService: QuestionControlService) { }
+  constructor(private formBuilder: FormBuilder, private questionControlService: QuestionFormGeneratorService) { }
 
   questionsForm: FormGroup;
 
