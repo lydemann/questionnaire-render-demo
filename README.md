@@ -1,6 +1,6 @@
 # QuestionnaireRenderDemo
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.1.
+This project contains a demo of how to render a questionnaire in Angular 5 using reactive forms.
 
 ## Development server
 
