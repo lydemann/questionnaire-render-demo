@@ -7,8 +7,12 @@ describe('questionnaire-render-demo App', () => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should display questions', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to app!');
+    const questionCount = page.getQuestionsCount();
+    questionCount.then((count) => {
+      console.log(`Question count: ${count}`);
+    });
+    expect(questionCount).toBeGreaterThan(0);
   });
 });

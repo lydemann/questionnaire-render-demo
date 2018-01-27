@@ -13,7 +13,7 @@ export class Question<T = any> {
 
     constructor() {
         this.answerOptions = [];
-        this.enabledCriteria = [];
+        this.enableCriteria = [];
         this.validationRules = [];
     }
 
@@ -22,7 +22,7 @@ export class Question<T = any> {
     helpText: string;
     answerType: string;
     answerOptions: AnswerOption[];
-    enabledCriteria: MatchCriteria[];
+    enableCriteria: MatchCriteria[];
     validationRules: string[];
     answer?: T;
 }

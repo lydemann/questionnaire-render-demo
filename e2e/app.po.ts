@@ -5,7 +5,7 @@ export class AppPage {
     return browser.get('/');
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getQuestionsCount() {
+    return element.all(by.css('app-root .question')).count();
   }
 }

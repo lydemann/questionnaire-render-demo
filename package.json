@@ -6,7 +6,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "test": "ng test -sm=false",
+    "test": "ng test -sm=false --single-run=true",
+    "test:watch": "ng test -sm=false",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
