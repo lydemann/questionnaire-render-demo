@@ -36,7 +36,7 @@ describe('QuestionComponent', () => {
     'helpText': 'Please write your name',
     'answerType': 'FreeText',
     'answerOptions': [],
-    'matchCriterias': [],
+    'enabledCriteria': [],
     'validationRules': [
       'Required'
     ]
@@ -71,7 +71,7 @@ describe('QuestionComponent', () => {
         'optionCode': 'US'
       }
     ],
-    'matchCriterias': [],
+    'enabledCriteria': [],
     'validationRules': [
       'Required'
     ]
@@ -106,7 +106,7 @@ describe('QuestionComponent', () => {
         'optionCode': 'OTHER'
       }
     ],
-    'matchCriterias': [],
+    'enabledCriteria': [],
     'validationRules': [
       'Required'
     ]

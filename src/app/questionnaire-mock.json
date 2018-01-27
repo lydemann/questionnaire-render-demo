@@ -13,7 +13,7 @@
             "helpText": "Please write your name",
             "answerType": "FreeText",
             "answerOptions": [],
-            "matchCriterias": [],
+            "enabledCriteria": [],
             "validationRules": [
               "Required"
             ]
@@ -37,7 +37,7 @@
                 "optionCode": "US"
               }
             ],
-            "matchCriterias": [],
+            "enabledCriteria": [],
             "validationRules": [
               "Required"
             ]
@@ -57,7 +57,7 @@
                 "optionCode": "FEMALE"
               }
             ],
-            "matchCriterias": [],
+            "enabledCriteria": [],
             "validationRules": [
               "Required"
             ]
@@ -81,7 +81,7 @@
                 "optionCode": "OTHER"
               }
             ],
-            "matchCriterias": [],
+            "enabledCriteria": [],
             "validationRules": [
               "Required"
             ]
